@@ -140,17 +140,15 @@ export default function BlogPreview() {
                   {post.excerpt}
                 </p>
 
-                {/* Read More — only for published posts */}
-                {post.published && (
-                  <div style={{ marginTop: 'auto', paddingTop: '0.75rem', borderTop: '1px solid #1E2D45' }}>
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', fontFamily: 'var(--font-dm-sans)', fontWeight: 500, fontSize: '0.8rem', color: '#4F8EF7', textDecoration: 'none' }}
-                    >
-                      Read More <ArrowRight size={12} />
-                    </Link>
-                  </div>
-                )}
+                {/* Read More — always link to post page */}
+                <div style={{ marginTop: 'auto', paddingTop: '0.75rem', borderTop: '1px solid #1E2D45' }}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', fontFamily: 'var(--font-dm-sans)', fontWeight: 500, fontSize: '0.8rem', color: '#4F8EF7', textDecoration: 'none' }}
+                  >
+                    {post.published ? 'Read More' : 'Preview'} <ArrowRight size={12} />
+                  </Link>
+                </div>
               </motion.div>
             );
           })}
