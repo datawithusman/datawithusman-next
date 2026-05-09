@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Clock, Lock } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import posts from '@/data/posts';
+import { getPost, getPostSlugs, getPosts } from '@/sanity/lib';
+import { notFound } from 'next/navigation';
 
 const CAT_STYLE: Record<string, { color: string; bg: string; border: string }> = {
   'Automation':    { color: '#4ADE80', bg: 'rgba(74,222,128,0.08)',  border: 'rgba(74,222,128,0.22)'  },
@@ -11,31 +12,22 @@ const CAT_STYLE: Record<string, { color: string; bg: string; border: string }> =
 };
 const DEFAULT_CAT = { color: '#8B97B0', bg: 'rgba(139,151,176,0.08)', border: 'rgba(139,151,176,0.2)' };
 
-export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const slugs = await getPostSlugs();
+  return slugs.map((s: any) => ({ slug: s.slug }));
 }
 
-export default function PostPage({ params }: { params: { slug: string } }) {
-  const post = posts.find((p) => p.slug === params.slug);
+export default async function PostPage({ params }: { params: { slug: string } }) {
+  const post = await getPost(params.slug);
+  const allPosts = await getPosts();
 
-  /* Unknown slug — graceful 404-like page */
   if (!post) {
-    return (
-      <>
-        <Navbar />
-        <main style={{ minHeight: '100vh', background: 'var(--bg)', paddingTop: 64, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ textAlign: 'center' }}>
-            <p style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '0.75rem', color: '#55647A', letterSpacing: '0.1em', marginBottom: '1rem' }}>POST NOT FOUND</p>
-            <Link href="/blog" style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.9rem', color: '#4F8EF7', textDecoration: 'none' }}>← Back to Blog</Link>
-          </div>
-        </main>
-      </>
-    );
+    notFound();
   }
 
   const cat = CAT_STYLE[post.category] ?? DEFAULT_CAT;
-  const related = posts.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 2);
-  const fallbackRelated = posts.filter((p) => p.slug !== post.slug).slice(0, 2);
+  const related = allPosts.filter((p: any) => p.slug !== post.slug && p.category === post.category).slice(0, 2);
+  const fallbackRelated = allPosts.filter((p: any) => p.slug !== post.slug).slice(0, 2);
   const relatedPosts = related.length ? related : fallbackRelated;
 
   return (
@@ -153,7 +145,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
                 More Posts
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
-                {relatedPosts.map((rp) => {
+                {relatedPosts.map((rp: any) => {
                   const rcat = CAT_STYLE[rp.category] ?? DEFAULT_CAT;
                   return (
                     <div

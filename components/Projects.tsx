@@ -2,7 +2,6 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import projects, { categories } from '@/data/projects';
 
 /* ── Category colours ── */
 const CAT_STYLE: Record<string, { color: string; bg: string; border: string }> = {
@@ -33,7 +32,7 @@ const fadeUp = {
   }),
 };
 
-export default function Projects() {
+export default function Projects({ projects, categories }: { projects: any[]; categories: string[] }) {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const [active, setActive] = useState('All');

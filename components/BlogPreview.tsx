@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, Clock } from 'lucide-react';
-import posts from '@/data/posts';
 
 /* ── Category colours ── */
 const CAT_STYLE: Record<string, { color: string; bg: string; border: string }> = {
@@ -23,7 +22,7 @@ const fadeUp = {
   }),
 };
 
-export default function BlogPreview() {
+export default function BlogPreview({ posts }: { posts: any[] }) {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
