@@ -14,7 +14,7 @@ function ProfilePhoto() {
       {!errored && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src="/images/profile.jpg"
+          src="/images/profile.jpeg"
           alt="Muhammad Usman"
           onLoad={() => setLoaded(true)}
           onError={() => setErrored(true)}
