@@ -8,7 +8,7 @@ export default defineConfig({
   name: 'datawithusman',
   title: 'Data with Usman',
 
-  projectId,
+  projectId: projectId || 'placeholder',
   dataset,
   apiVersion,
 

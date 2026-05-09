@@ -1,9 +1,7 @@
 import { getAllPosts as sanityGetAllPosts, getPostBySlug as sanityGetPostBySlug, getPostSlugs as sanityGetPostSlugs, getAllProjects as sanityGetAllProjects } from './queries'
 import staticPosts from '@/data/posts'
 import staticProjects, { categories as staticCategories } from '@/data/projects'
-import { projectId } from './env'
-
-const sanityConfigured = projectId !== 'your_project_id_here'
+import { sanityConfigured } from './env'
 
 // ── Blog Posts ──
 
