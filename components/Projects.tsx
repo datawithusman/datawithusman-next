@@ -2,7 +2,6 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import projects, { categories } from '@/data/projects';
 
 /* ── Category colours ── */
@@ -249,27 +248,6 @@ export default function Projects() {
                     </p>
                   </div>
 
-                  {/* View Details link */}
-                  <div style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
-                    <a
-                      href={`/projects/${project.slug}`}
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.4rem',
-                        fontFamily: 'var(--font-dm-sans)',
-                        fontWeight: 500,
-                        fontSize: '0.82rem',
-                        color: '#4F8EF7',
-                        textDecoration: 'none',
-                        transition: 'gap 0.18s',
-                      }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.gap = '0.65rem'; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.gap = '0.4rem'; }}
-                    >
-                      View Details <ArrowRight size={13} />
-                    </a>
-                  </div>
                 </motion.div>
               );
             })}
