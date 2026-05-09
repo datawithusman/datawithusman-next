@@ -272,6 +272,15 @@
   }
 }
 
+/* ── Server Component hover effects (no JS event handlers) ── */
+.hover-link-muted:hover {
+  color: #8B97B0 !important;
+}
+
+.related-post-card:hover {
+  border-color: rgba(79,142,247,0.3) !important;
+}
+
 /* ── Utility animations ── */
 @keyframes blink         { 0%,100% { opacity:1 } 50% { opacity:0 } }
 @keyframes cursor-pulse  { 0%,100% { opacity:1 } 50% { opacity:0.15 } }

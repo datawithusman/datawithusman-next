@@ -52,6 +52,7 @@ export default function Contact() {
   const [focused, setFocused]   = useState<string | null>(null);
   const [submitting, setSubmit] = useState(false);
   const [sent, setSent]         = useState(false);
+  const [error, setError]       = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -59,11 +60,29 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmit(true);
-    // Replace action with your Formspree endpoint: https://formspree.io/f/YOUR_ID
-    console.log('Form submission:', form);
-    await new Promise((r) => setTimeout(r, 900));
-    setSent(true);
-    setSubmit(false);
+    setError('');
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/datawithusman@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          _subject: `Portfolio Contact: Message from ${form.name}`,
+        }),
+      });
+
+      if (!res.ok) throw new Error('Submission failed');
+
+      setSent(true);
+      setForm({ name: '', email: '', message: '' });
+    } catch {
+      setError('Something went wrong. Please try again or email me directly.');
+    } finally {
+      setSubmit(false);
+    }
   };
 
   const inputBase: React.CSSProperties = {
@@ -270,6 +289,13 @@ export default function Contact() {
                       style={{ ...inputBase, resize: 'vertical', minHeight: 120, ...(focused === 'message' ? inputFocused : {}) }}
                     />
                   </div>
+
+                  {/* Error message */}
+                  {error && (
+                    <p style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.82rem', color: '#FF6B6B', textAlign: 'center', margin: 0 }}>
+                      {error}
+                    </p>
+                  )}
 
                   {/* Submit */}
                   <button

@@ -54,14 +54,13 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           {/* Back link */}
           <Link
             href="/blog"
+            className="hover-link-muted"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
               fontFamily: 'var(--font-dm-sans)', fontSize: '0.82rem',
               color: '#55647A', textDecoration: 'none', marginBottom: '2.5rem',
               transition: 'color 0.18s',
             }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#8B97B0'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#55647A'; }}
           >
             <ArrowLeft size={13} /> Back to Blog
           </Link>
@@ -159,13 +158,12 @@ export default function PostPage({ params }: { params: { slug: string } }) {
                   return (
                     <div
                       key={rp.slug}
+                      className="related-post-card"
                       style={{
                         background: '#0E1520', border: '1px solid #1E2D45', borderRadius: 12,
                         padding: '1.4rem', display: 'flex', flexDirection: 'column', gap: '0.75rem',
                         transition: 'border-color 0.22s',
                       }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(79,142,247,0.3)'; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = '#1E2D45'; }}
                     >
                       <span style={{ fontFamily: 'var(--font-jetbrains)', fontSize: '0.6rem', letterSpacing: '0.07em', padding: '0.18rem 0.55rem', borderRadius: 4, background: rcat.bg, color: rcat.color, border: `1px solid ${rcat.border}`, width: 'fit-content' }}>
                         {rp.category}
