@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { ArrowRight, Menu, X, FileText } from 'lucide-react';
 
 const navLinks = [
   { name: 'About',    href: '/#about' },
@@ -117,6 +117,37 @@ export default function Navbar() {
             );
           })}
 
+          {/* Resume */}
+          <a
+            href="/Muhammad_Usman_Resume_2026.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              padding: '0.45rem 0.9rem',
+              fontFamily: 'var(--font-dm-sans)',
+              fontWeight: 500,
+              fontSize: '0.82rem',
+              color: '#55647A',
+              textDecoration: 'none',
+              borderRadius: 7,
+              transition: 'color 0.2s, background 0.2s',
+              marginLeft: '0.25rem',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.color = '#8B97B0';
+              (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.04)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.color = '#55647A';
+              (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+            }}
+          >
+            <FileText size={14} /> Resume
+          </a>
+
           {/* CTA */}
           <Link
             href="/#contact"
@@ -189,6 +220,36 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+
+            {/* Resume - Mobile */}
+            <a
+              href="/Muhammad_Usman_Resume_2026.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                padding: '0.75rem 0.75rem',
+                fontFamily: 'var(--font-dm-sans)',
+                fontWeight: 500,
+                fontSize: '0.88rem',
+                color: '#8B97B0',
+                textDecoration: 'none',
+                borderRadius: 8,
+                transition: 'color 0.2s, background 0.2s',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.color = '#E8EDF5';
+                (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.04)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.color = '#8B97B0';
+                (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+              }}
+            >
+              <FileText size={16} /> Resume
+            </a>
 
             <div style={{ paddingTop: '1rem', borderTop: '1px solid rgba(30,45,69,0.6)', marginTop: '0.5rem' }}>
               <Link
